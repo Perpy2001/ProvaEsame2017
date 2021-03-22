@@ -50,3 +50,4 @@ if (strlen($password) < 8) {
     }
    
 }
+?>

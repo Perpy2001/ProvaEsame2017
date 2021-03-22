@@ -2,6 +2,7 @@
 
 <head>
     <?php
+    
     if(isset($_GET['errore'])){
      $errore = $_GET['errore'];}
     ?>
