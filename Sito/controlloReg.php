@@ -53,3 +53,4 @@ if (strlen($password) < 8) {
         } else header("Location: registra.php?errore='Mail gia inserita'");
     }
 }
+?>

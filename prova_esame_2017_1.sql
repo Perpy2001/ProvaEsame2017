@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 13, 2021 alle 08:51
--- Versione del server: 10.4.17-MariaDB
--- Versione PHP: 8.0.0
+-- Creato il: Mar 13, 2021 alle 11:18
+-- Versione del server: 10.4.14-MariaDB
+-- Versione PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,6 +34,13 @@ CREATE TABLE `autisti` (
   `CF` char(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dump dei dati per la tabella `autisti`
+--
+
+INSERT INTO `autisti` (`Npatente`, `Scadenza`, `nick`, `CF`) VALUES
+('VE1234567B', '31/12/2030', 'Spissa in testa', 'GRTNCL02D01L736B');
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +54,14 @@ CREATE TABLE `auto` (
   `Npatente` char(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dump dei dati per la tabella `auto`
+--
+
+INSERT INTO `auto` (`targa`, `modello`, `alimentazione`, `Npatente`) VALUES
+('FD132BD', 'B.M.B. / Menarinibus \"', 'Metano', 'VE1234567B'),
+('FF123DB', 'Mercedes Vito 9 Posti', 'Diesel', 'VE1234567B');
+
 -- --------------------------------------------------------
 
 --
@@ -54,9 +69,19 @@ CREATE TABLE `auto` (
 --
 
 CREATE TABLE `av` (
-  `Npatente` char(10) DEFAULT NULL,
-  `CodV` int(22) DEFAULT NULL
+  `Npatente` char(10) NOT NULL,
+  `CodV` int(22) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `av`
+--
+
+INSERT INTO `av` (`Npatente`, `CodV`) VALUES
+('VE1234567B', 1),
+('VE1234567B', 2),
+('VE1234567B', 3),
+('VE1234567B', 4);
 
 -- --------------------------------------------------------
 
@@ -70,6 +95,13 @@ CREATE TABLE `passegieri` (
   `CF` char(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dump dei dati per la tabella `passegieri`
+--
+
+INSERT INTO `passegieri` (`CodP`, `nick`, `CF`) VALUES
+('1', 'LordDermatite', 'GRTNCL02D01L736B');
+
 -- --------------------------------------------------------
 
 --
@@ -77,9 +109,16 @@ CREATE TABLE `passegieri` (
 --
 
 CREATE TABLE `pr` (
-  `CodR` int(22) DEFAULT NULL,
-  `CodP` char(22) DEFAULT NULL
+  `CodR` int(22) NOT NULL,
+  `CodP` char(22) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `pr`
+--
+
+INSERT INTO `pr` (`CodR`, `CodP`) VALUES
+(1, '1');
 
 -- --------------------------------------------------------
 
@@ -95,6 +134,13 @@ CREATE TABLE `recensioni` (
   `CF` char(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dump dei dati per la tabella `recensioni`
+--
+
+INSERT INTO `recensioni` (`CodRec`, `numerico`, `note`, `tipo`, `CF`) VALUES
+(1, '4', 'Sarebbe il TOP se non si grattasse la te', 'passeggero', 'GRTNCL02D01L736B');
+
 -- --------------------------------------------------------
 
 --
@@ -108,6 +154,13 @@ CREATE TABLE `richiesta` (
   `data` char(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dump dei dati per la tabella `richiesta`
+--
+
+INSERT INTO `richiesta` (`CodR`, `partenza`, `destinazione`, `data`) VALUES
+(1, 'Venezia', 'Milano', '1/4/2020');
+
 -- --------------------------------------------------------
 
 --
@@ -115,8 +168,8 @@ CREATE TABLE `richiesta` (
 --
 
 CREATE TABLE `rv` (
-  `CodR` int(22) DEFAULT NULL,
-  `CodV` int(22) DEFAULT NULL
+  `CodR` int(22) NOT NULL,
+  `CodV` int(22) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -136,6 +189,13 @@ CREATE TABLE `utente` (
   `CodP` char(22) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dump dei dati per la tabella `utente`
+--
+
+INSERT INTO `utente` (`CF`, `nome`, `cognome`, `tel`, `foto`, `email`, `Npatente`, `CodP`) VALUES
+('GRTNCL02D01L736B', 'Nicolo', 'Grattatesta', '3331234567', '', 'GrattatestaNick@gmail.', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -147,12 +207,22 @@ CREATE TABLE `viaggio` (
   `partenza` char(22) DEFAULT NULL,
   `destinazione` char(22) DEFAULT NULL,
   `data` char(10) DEFAULT NULL,
-  `oraP` char(22) DEFAULT NULL,
-  `oraA` char(22) DEFAULT NULL,
+  `oraP` time DEFAULT NULL,
+  `oraA` time DEFAULT NULL,
   `Costo` char(6) DEFAULT NULL,
   `disponibilita` int(10) DEFAULT NULL,
   `note` char(22) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `viaggio`
+--
+
+INSERT INTO `viaggio` (`codV`, `partenza`, `destinazione`, `data`, `oraP`, `oraA`, `Costo`, `disponibilita`, `note`) VALUES
+(1, 'Venezia', 'Milano', '1/4/2020', '08:00:00', '11:00:00', '200', 3, ''),
+(2, 'Venezia', 'Milano', '1/4/2020', '06:00:00', '09:00:00', '100', 7, ''),
+(3, 'Venezia', 'Milano', '1/4/2020', '12:00:00', '16:00:00', '250', 8, ''),
+(4, 'Venezia', 'Milano', '1/4/2020', '15:00:00', '21:00:00', '40', 35, 'Bus');
 
 --
 -- Indici per le tabelle scaricate
@@ -176,6 +246,7 @@ ALTER TABLE `auto`
 -- Indici per le tabelle `av`
 --
 ALTER TABLE `av`
+  ADD PRIMARY KEY (`Npatente`,`CodV`),
   ADD KEY `CodV` (`CodV`),
   ADD KEY `Npatente` (`Npatente`);
 
@@ -190,6 +261,7 @@ ALTER TABLE `passegieri`
 -- Indici per le tabelle `pr`
 --
 ALTER TABLE `pr`
+  ADD PRIMARY KEY (`CodR`,`CodP`),
   ADD KEY `CodP` (`CodP`),
   ADD KEY `CodR` (`CodR`);
 
@@ -210,6 +282,7 @@ ALTER TABLE `richiesta`
 -- Indici per le tabelle `rv`
 --
 ALTER TABLE `rv`
+  ADD PRIMARY KEY (`CodR`,`CodV`),
   ADD KEY `CodV` (`CodV`),
   ADD KEY `CodR` (`CodR`);
 
