@@ -29,7 +29,7 @@
             <input type='submit' value="invio">
         </form>
         <?php
-        echo "<p>$errore</p>"
+       if(isset($errore)){ echo "<p>$errore</p>";}
         ?>
     </div>
 </body>

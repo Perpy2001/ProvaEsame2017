@@ -44,9 +44,12 @@ if (strlen($password) < 8) {
     $mysqli = new mysqli('localhost', 'root', '', 'prova_esame_2017');
     if ($mysqli->connect_error) {
         die('Errore di connessione (' . $mysqli->connect_errno . ')' . $mysqli->connect_error);
-    } else { header("Location: home.php");
-    $inserimento = "INSERT INTO `utente`(`CF`, `nome`, `cognome`, `tel`, `email`, `password`) VALUES ('$CF','$nome','$cognome','$tel','$mail','$password')";
-    $mysqli->query($inserimento);
+    } else {
+        $esiste = $mysqli->query("SELECT * FROM utente WHERE email='$mail'");
+        if (mysqli_num_rows($esiste)==0) {
+            header("Location: home.php?mail=$mail");    
+            $inserimento = "INSERT INTO `utente`(`CF`, `nome`, `cognome`, `tel`, `email`, `password`) VALUES ('$CF','$nome','$cognome','$tel','$mail','$password')";
+            $mysqli->query($inserimento);
+        } else header("Location: registra.php?errore='Mail gia inserita'");
     }
-   
 }
