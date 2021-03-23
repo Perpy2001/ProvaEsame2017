@@ -1,0 +1,17 @@
+1)SELECT viaggio.partenza,viaggio.destinazione,viaggio.data,viaggio.oraP,viaggio.oraA,viaggio.Costo,autisti.nick,auto.targa,auto.modello
+FROM ((viaggio
+JOIN auto,autisti)
+INNER JOIN richiesta ON viaggio.partenza=richiesta.partenza AND viaggio.destinazione =richiesta.destinazione AND
+viaggio.data=richiesta.data)
+WHERE viaggio.disponibilita>=1
+GROUP BY viaggio.oraP
+2)
+SELECT prenotazione.Nprenotazione,viaggio.partenza,viaggio.destinazione,viaggio.data,viaggio.oraP,viaggio.oraA,viaggio.Costo,passegieri.nick
+FROM prenotazione
+INNER JOIN vp ON vp.Nprenotazione=prenotazione.Nprenotazione
+INNER JOIN viaggio ON vp.CodV=viaggio.codV
+INNER JOIN passegieri ON passegieri.CodP=prenotazione.CodP
+3)
+SELECT passegieri.nick,AVG(recensioni.numerico)AS Votomedio
+FROM viaggio WHERE autisti.Npatente=av.Npatente AND viaggio.codV=av.CodV
+INNER JOIN vp ON vp.CodV=viaggio.codV
