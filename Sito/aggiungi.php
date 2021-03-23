@@ -16,6 +16,9 @@
             <br> Destinazione:
             <br>
             <input type='text' name='destinazione'>
+            <br> Data Partenza:
+            <br>
+            <input type='text' name='dataP'>
             <br>Ora Partenza:
             <br> <input type='text' name='oraP'>
             <br> Ora Arrivo:
