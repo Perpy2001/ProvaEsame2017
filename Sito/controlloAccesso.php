@@ -19,7 +19,7 @@ if (isset($_POST['password'])) {
     $verifica = "SELECT 'password' FROM 'utente' WHERE 'email' = '$email'";
     $ris = $database ->query($verifica);
     echo "<br>";
-    echo "voti sufficienti di Russo: ";
+    
     while($riga = $ris ->fetch_array(MYSQLI_ASSOC)){
         echo "<br>";
         if($riga['password'] == $password) header("Location: home.php?");
