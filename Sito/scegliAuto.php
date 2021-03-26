@@ -26,7 +26,7 @@ if(is_bool($result)){
     );}
     ?>
     <div id="form">
-        <form action="aggiuntaViaggio.php?Npatente=$Npatente" method='POST'>
+        <form action="aggiuntaViaggio.php?Npatente=".$Npatente method='POST'>
             Targa:
             <br> <input type='text' name='targa'>
             <br> Modello:
