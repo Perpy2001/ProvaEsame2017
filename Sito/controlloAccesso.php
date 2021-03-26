@@ -16,7 +16,7 @@ if (isset($_POST['password'])) {
     if ($mysqli->connect_error) {
         die('Errore di connessione (' . $mysqli->connect_errno . ')' . $mysqli->connect_error);
     } else { header("Location: home.php");
-    $verifica = "SELECT 'password' FROM 'utente' WHERE 'email' = '$email'";
+    $verifica = "SELECT password FROM utente WHERE email = '$email'";
     $ris = $database ->query($verifica);
     echo "<br>";
     

@@ -15,7 +15,9 @@
 <body>
     <?php echo("benvenuto $mail")?>
     <div id="form">
-        <form action='aggiungi.php' method='POST'>
+        <form action='scegliAuto.php' method='POST'>
+            Npatente: 
+            <br> <input type='text' name='Npatente'><br>
             <input value="Proponi Viaggio" type='submit'>
         </form>
         <form action='cerca.php' method='POST'>
