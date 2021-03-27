@@ -2,13 +2,16 @@
 
 <head>
     <?php
+     $mail=$_GET['mail'];
     $mysqli = new mysqli('localhost', 'root', '', 'prova_esame_2017');
     if ($mysqli->connect_error) {
         die('Errore di connessione (' . $mysqli->connect_errno . ')' . $mysqli->connect_error);
         
     }
-    $Npatente=$_POST['Npatetnte'];
-        $sql = "SELECT * FROM auto WHERE Npatetnte='$Npatente'";
+    if(strlen($_POST['Npatente'])==10){
+        $Npatente=$_POST['Npatente'];
+    }else echo("Location: home.php");
+        $sql = "SELECT * FROM auto WHERE Npatente='$Npatente'";
         $result = $mysqli->query($sql);
     ?>
     <link rel='stylesheet' href='./css.css'>
@@ -20,26 +23,29 @@ if(is_bool($result)){
         
     }else
      while($row = $result->fetch_assoc()) {
-        echo ("Targa: " . $row["targa"]. 
-        "Modello: " . $row["modello"]. 
-        "Alimentazione:".$row["alimentazione"]."<br>"
+       $targa=$row['targa'];
+        echo ("Targa: " . $targa. 
+        "<br> Modello: " . $row["modello"]. 
+        "<br> Alimentazione:".$row["alimentazione"]."<br>
+        <form action='aggiungi.php?Npatente=$Npatente&targa=$targa&mail=$mail' method='POST'>
+        <input type='submit' value='Scegli macchina'>
+        </form>
+        <br>"
     );}
-    ?>
-    <div id="form">
-        <form action="aggiuntaViaggio.php?Npatente=".$Npatente method='POST'>
+    
+    echo("<div id='form'>
+        <form action='aggiungi.php?Npatente=$Npatente&mail=$mail' method='POST'>
             Targa:
-            <br> <input type='text' name='targa'>
+            <br> <input type='text' name='targa' required='required'>
             <br> Modello:
             <br>
-            <input type='text' name='modello'>
+            <input type='text' name='modello' required='required'>
             <br> Alimentazione:
             <br>
-            <input type='text' name='alimentazione'>
+            <input type='text' name='alimentazione' required='required'>
 
-            <input type='submit' value="Aggiungi macchina ">
-        </form>
-        <?php
-       
+            <input type='submit' value='Aggiungi macchina'>
+        </form>")
         ?>
     </div>
 </body>

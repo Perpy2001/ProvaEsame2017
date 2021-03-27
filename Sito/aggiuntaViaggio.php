@@ -1,34 +1,21 @@
 <?php
-if (isset($_POST['partenza'])) {
-    $partenza = $_POST['partenza'];
-} else header("Location: registra.php?errore='partenza non valida'");
+$mail = $_GET['mail'];
+$partenza = $_POST['partenza'];
 
-if (isset($_POST['destinazione'])) {
-    $destinazione = $_POST['destinazione'];
-} else header("Location: registra.php?errore='destinazione non deve essere nulla");
+$destinazione = $_POST['destinazione'];
 
-if (isset($_POST["oraP"])) {
-    $oraP = $_POST["oraP"];
-} else header("Location: registra.php?errore='oraP nullo");
+$oraP = $_POST["oraP"];
 
-if (isset($_POST["oraA"])) {
-    $oraA = $_POST["oraA"];
-} else header("Location: registra.php?errore='oraA nullo");
+$oraA = $_POST["oraA"];
 
-if (isset($_POST["dataP"])) {
-    $dataP = $_POST["dataP"];
-} else header("Location: registra.php?errore='dataP nullo");
+$dataP = $_POST["dataP"];
 
-if (isset($_POST["costo"])) {
-    $costo = $_POST["costo"];
-} else header("Location: registra.php?errore='costo nulla");
+$costo = $_POST["costo"];
 
-if (isset($_POST["disp"])) {
-    $disp = $_POST["disp"];
-} else header("Location: registra.php?errore='disponibilita nulla");
+$disp = $_POST["disp"];
 
 $note = $_POST["note"];
-
+$Npatente = $_GET["Npatente"];
 
 $mysqli = new mysqli('localhost', 'root', '', 'prova_esame_2017');
 if ($mysqli->connect_error) {
@@ -36,8 +23,23 @@ if ($mysqli->connect_error) {
 } else {
     $result = $mysqli->query("SELECT MAX(CodV) AS codV FROM viaggio");
     while ($row = $result->fetch_assoc()) {
-        $codV = $row["codV"]+1;
+        $codV = $row["codV"] + 1;
     }
     $inserimento = "  INSERT INTO `viaggio`(codV,`partenza`, `destinazione`, `data`, `oraP`, `oraA`, `Costo`, `disponibilita`, `note`) VALUES ( $codV,'$partenza','$destinazione','$dataP','$oraP','$oraA','$costo',$disp,'$note')";
     $mysqli->query($inserimento);
+    $inserimento = "INSERT INTO `av`(`Npatente`, `CodV`) VALUES ('$Npatente',$codV)";
+    $mysqli->query($inserimento);
+    echo ("<html>
+    <div>
+    VIAGGIO AGGIUNTO TORNA ALLA HOME
+    <form action='home.php?mail=$mail'>
+        <input type='submit' value='home'>
+        </form><br></div>
+        <div>
+        O VISUALIZZA I TUOI VIAGGI
+    <form action='viaggi.php?mail=$mail'>
+        <input type='submit' value='I tuoi viaggi'>
+        </form></div>
+        </html>
+    ");
 }

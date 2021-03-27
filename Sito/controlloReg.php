@@ -45,7 +45,7 @@ if (strlen($password) < 8) {
     if ($mysqli->connect_error) {
         die('Errore di connessione (' . $mysqli->connect_errno . ')' . $mysqli->connect_error);
     } else {
-        $esiste = $mysqli->query("SELECT * FROM utente WHERE email='$mail'");
+        $esiste = $mysqli->query("SELECT * FROM utente WHERE mail='$mail'");
         if (mysqli_num_rows($esiste)==0) {
             header("Location: home.php?mail=$mail");    
             $inserimento = "INSERT INTO `utente`(`CF`, `nome`, `cognome`, `tel`, `email`, `password`) VALUES ('$CF','$nome','$cognome','$tel','$mail','$password')";

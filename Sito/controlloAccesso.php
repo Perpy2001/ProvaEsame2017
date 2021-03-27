@@ -22,7 +22,7 @@ if (isset($_POST['password'])) {
     if (mysqli_num_rows($ris)!=0) {
     while($riga = $ris ->fetch_array(MYSQLI_ASSOC)){
         echo "<br>";
-        if($riga['password'] == $password) header("Location: home.php?email=$email");
+        if($riga['password'] == $password) header("Location: home.php?mail=$email");
         else  header("Location: accesso.php?errore='password errata'");
     }
     } else header("Location: registra.php?errore='Mail sbagliata'");}
