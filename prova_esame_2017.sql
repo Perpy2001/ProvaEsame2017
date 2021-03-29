@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 23, 2021 alle 11:56
+-- Creato il: Mar 29, 2021 alle 13:12
 -- Versione del server: 10.4.14-MariaDB
 -- Versione PHP: 7.2.34
 
@@ -39,7 +39,8 @@ CREATE TABLE `autisti` (
 --
 
 INSERT INTO `autisti` (`Npatente`, `Scadenza`, `nick`, `CF`) VALUES
-('VE1234567B', '31/12/2030', 'Spissa in testa', 'GRTNCL02D01L736B');
+('VE1234567B', '31/12/2030', 'Spissa in testa', 'GRTNCL02D01L736B'),
+('VE2345678B', '11/12/2030', 'Gratta', 'SPSNST76E16L736V');
 
 -- --------------------------------------------------------
 
@@ -100,7 +101,8 @@ CREATE TABLE `passegieri` (
 --
 
 INSERT INTO `passegieri` (`CodP`, `nick`, `CF`) VALUES
-('1', 'LordDermatite', 'GRTNCL02D01L736B');
+('1', 'LordDermatite', 'GRTNCL02D01L736B'),
+('2', 'Gratta', 'SPSNST76E16L736V');
 
 -- --------------------------------------------------------
 
@@ -136,10 +138,10 @@ CREATE TABLE `prenotazione` (
 --
 
 INSERT INTO `prenotazione` (`CodP`, `Nprenotazione`) VALUES
-('1', 1),
-('1', 2),
 ('1', 3),
-('1', 4);
+('1', 4),
+('2', 1),
+('2', 2);
 
 -- --------------------------------------------------------
 
@@ -164,7 +166,12 @@ INSERT INTO `recensioni` (`CodRec`, `numerico`, `note`, `tipo`, `CF`) VALUES
 (2, '5', '', 'passeggero', 'GRTNCL02D01L736B'),
 (3, '3', '', 'autista', 'GRTNCL02D01L736B'),
 (4, '4', '', 'autista', 'GRTNCL02D01L736B'),
-(5, '5', '', 'autista', 'GRTNCL02D01L736B');
+(5, '5', '', 'autista', 'GRTNCL02D01L736B'),
+(6, '3', '', 'autista', 'SPSNST76E16L736V'),
+(7, '4', '', 'autista', 'SPSNST76E16L736V'),
+(8, '5', '', 'autista', 'SPSNST76E16L736V'),
+(9, '1', '', 'autista', 'SPSNST76E16L736V'),
+(10, '4', '', 'autista', 'SPSNST76E16L736V');
 
 -- --------------------------------------------------------
 
@@ -176,33 +183,16 @@ CREATE TABLE `richiesta` (
   `CodR` int(22) NOT NULL,
   `partenza` char(22) DEFAULT NULL,
   `destinazione` char(22) DEFAULT NULL,
-  `data` char(10) DEFAULT NULL
+  `data` char(10) DEFAULT NULL,
+  `CodV` int(22) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `richiesta`
 --
 
-INSERT INTO `richiesta` (`CodR`, `partenza`, `destinazione`, `data`) VALUES
-(1, 'Venezia', 'Milano', '1/4/2020');
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `rv`
---
-
-CREATE TABLE `rv` (
-  `CodR` int(22) NOT NULL,
-  `CodV` int(22) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dump dei dati per la tabella `rv`
---
-
-INSERT INTO `rv` (`CodR`, `CodV`) VALUES
-(1, 1);
+INSERT INTO `richiesta` (`CodR`, `partenza`, `destinazione`, `data`, `CodV`) VALUES
+(1, 'Venezia', 'Milano', '1/4/2020', 1);
 
 -- --------------------------------------------------------
 
@@ -227,7 +217,8 @@ CREATE TABLE `utente` (
 --
 
 INSERT INTO `utente` (`CF`, `nome`, `cognome`, `tel`, `foto`, `email`, `Npatente`, `CodP`, `Password`) VALUES
-('GRTNCL02D01L736B', 'Nicolo', 'Grattatesta', '3331234567', '', 'GrattatestaNick@gmail.', 'VE1234567B', '1', 'MiGrattoLaTesta');
+('GRTNCL02D01L736B', 'Nicolo', 'Grattatesta', '3331234567', '', 'GrattatestaNick@gmail.', 'VE1234567B', '1', 'MiGrattoLaTesta'),
+('SPSNST76E16L736V', 'InTesta', 'Spissa', '1234567890', '', 'SpissaTesta@gmail.com', 'VE2345678B', '2', 'grattatesta');
 
 -- --------------------------------------------------------
 
@@ -274,9 +265,9 @@ CREATE TABLE `vp` (
 
 INSERT INTO `vp` (`Nprenotazione`, `CodV`) VALUES
 (1, 1),
-(2, 2),
-(3, 3),
-(4, 4);
+(2, 1),
+(3, 1),
+(4, 1);
 
 --
 -- Indici per le tabelle scaricate
@@ -337,15 +328,8 @@ ALTER TABLE `recensioni`
 -- Indici per le tabelle `richiesta`
 --
 ALTER TABLE `richiesta`
-  ADD PRIMARY KEY (`CodR`);
-
---
--- Indici per le tabelle `rv`
---
-ALTER TABLE `rv`
-  ADD PRIMARY KEY (`CodR`,`CodV`),
-  ADD KEY `CodV` (`CodV`),
-  ADD KEY `CodR` (`CodR`);
+  ADD PRIMARY KEY (`CodR`),
+  ADD KEY `CodV` (`CodV`);
 
 --
 -- Indici per le tabelle `utente`
@@ -412,11 +396,10 @@ ALTER TABLE `recensioni`
   ADD CONSTRAINT `recensioni_ibfk_1` FOREIGN KEY (`CF`) REFERENCES `utente` (`CF`);
 
 --
--- Limiti per la tabella `rv`
+-- Limiti per la tabella `richiesta`
 --
-ALTER TABLE `rv`
-  ADD CONSTRAINT `rv_ibfk_1` FOREIGN KEY (`CodV`) REFERENCES `viaggio` (`codV`),
-  ADD CONSTRAINT `rv_ibfk_2` FOREIGN KEY (`CodR`) REFERENCES `richiesta` (`CodR`);
+ALTER TABLE `richiesta`
+  ADD CONSTRAINT `richiesta_ibfk_1` FOREIGN KEY (`CodV`) REFERENCES `viaggio` (`codV`);
 
 --
 -- Limiti per la tabella `utente`
