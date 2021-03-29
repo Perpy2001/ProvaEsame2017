@@ -24,8 +24,11 @@
         <?php    echo("<form action='cerca.php?mail=$mail'>");?>
             <input value="Cerca Viaggio" type='submit'>
         </form>
-    </div>
-
+    
+        <?php    echo("<form action='recensioni.php?mail=$mail'>");?>
+            <input value="scrivi una recensione" type='submit'>
+        </form>
+        </div>
 </body>
 
 </html>
