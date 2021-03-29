@@ -25,6 +25,12 @@ if ($mysqli->connect_error) {
     while ($row = $result->fetch_assoc()) {
         $codV = $row["codV"] + 1;
     }
+    $result = $mysqli->query("SELECT CF FROM utente WHERE email=$mail");
+    while ($row = $result->fetch_assoc()) {
+        $CF = $row["CF"];
+    }
+    $inserimento = "INSERT INTO `autisti`(`Npatente`, `CF`) VALUES ('$Npatente','$CF')";
+    $mysqli->query($inserimento);
     $inserimento = "  INSERT INTO `viaggio`(codV,`partenza`, `destinazione`, `data`, `oraP`, `oraA`, `Costo`, `disponibilita`, `note`) VALUES ( $codV,'$partenza','$destinazione','$dataP','$oraP','$oraA','$costo',$disp,'$note')";
     $mysqli->query($inserimento);
     $inserimento = "INSERT INTO `av`(`Npatente`, `CodV`) VALUES ('$Npatente',$codV)";
