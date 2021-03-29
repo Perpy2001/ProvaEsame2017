@@ -12,6 +12,12 @@ INNER JOIN vp ON vp.Nprenotazione=prenotazione.Nprenotazione
 INNER JOIN viaggio ON vp.CodV=viaggio.codV
 INNER JOIN passegieri ON passegieri.CodP=prenotazione.CodP
 3)
-SELECT passegieri.nick,AVG(recensioni.numerico)AS Votomedio
-FROM viaggio WHERE autisti.Npatente=av.Npatente AND viaggio.codV=av.CodV
-INNER JOIN vp ON vp.CodV=viaggio.codV
+SELECT utente.cognome,utente.nome,viaggio.codV,AVG(recensioni.numerico) AS VotoMedio
+FROM recensioni
+INNER JOIN utente ON utente.CF=recensioni.CF
+INNER JOIN passegieri ON passegieri.CodP=utente.CodP
+INNER JOIN prenotazione ON passegieri.CodP=prenotazione.CodP
+INNER JOIN vp ON prenotazione.Nprenotazione=vp.Nprenotazione
+INNER JOIN viaggio ON vp.CodV=viaggio.codV
+WHERE recensioni.tipo='autista' AND viaggio.codV=1
+GROUP BY recensioni.CF
