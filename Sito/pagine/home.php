@@ -27,6 +27,12 @@
     
         <?php    echo("<form action='recensioni.php?mail=$mail'  method='POST'>");?>
             <input value="scrivi una recensione" type='submit'>
+            </form>
+            <?php    echo("<form action='myViaggi.php?mail=$mail'  method='POST'>");?>
+            <input value="I miei Viaggi" type='submit'>
+            </form>
+            <?php    echo("<form action='prenotazioni.php?mail=$mail'  method='POST'>");?>
+            <input value="Le mie prenotazioni" type='submit'>
         </form>
         </div>
 </body>

@@ -14,7 +14,7 @@ $mysqli = new mysqli('localhost', 'root', '', 'prova_esame_2017');
         $codP = $row["CodP"];
         $codP++;
     }
-    $inserimento = "INSERT INTO `passegieri`(`CodP`, `CF`,nick) VALUES ('$codP','$CF',$nick)";
+    $inserimento = "INSERT INTO `passegieri`(`CodP`, `CF`,nick) VALUES ('$codP','$CF','$nick')";
     $mysqli->query($inserimento);
     $update = "UPDATE utente SET CodP='$codP' WHERE CF='$CF'";
     $mysqli->query($update);

@@ -27,7 +27,7 @@
         "Costo:".$row["Costo"]."<br>".
         "Note:".$row["note"]."<br></div>"
     );
-    echo("<form action='../pagine/prenota.php?mail=$mail&Codv=$CodV&codP=$codP'>
+    echo("<form action='../pagine/prenota.php?mail=$mail&Codv=$CodV&CodP=$codP' method='POST'>
     <input type='submit' value='Richiedi un posto'>
     </form>
     ");
