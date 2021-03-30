@@ -3,14 +3,15 @@
 <head>
     <?php
     $mail = $_GET["mail"];
-
+    $codP = $_GET["CodP"];
     ?>
     <link rel='stylesheet' href='./css.css'>
 </head>
 
 <body>
     <div id="form">
-        <?php echo ("<form action='../interazioneDB/cercaPartenza.php?mail=$mail&CodP=$codP' method='POST'>") ?>
+        <?php
+        echo ("<form action='../interazioneDB/cercaPartenza.php?mail=$mail&CodP=$codP' method='POST'>") ?>
         Partenza:
         <br> <input type='text' name='partenza' required='required'>
         <input value="Cerca Viaggio" type='submit'>

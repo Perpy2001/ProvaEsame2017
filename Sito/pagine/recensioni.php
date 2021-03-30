@@ -1,13 +1,15 @@
 <html>
 
 <head>
-    
+    <?php
+     $mail=$_GET["mail"];
+    ?>
     <link rel='stylesheet' href='./css.css'>
 </head>
 
 <body>
     <div id="form">
-      <?php  echo("<form action='../interazioneDB/aggiuntaRecensioni.php?' method='POST'>") ?>
+      <?php  echo("<form action='../interazioneDB/aggiuntaRecensioni.php?mail=$mail' method='POST'>") ?>
             <br> Tipo utente
             <br> <input type="radio" name="tipo" id="Passeggero" value="Passeggero" />
                 <label for="Passeggero">Passeggero</label>

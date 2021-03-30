@@ -15,18 +15,17 @@
 <body>
     <?php echo("<div>benvenuto $mail </div>")?>
     <div id="form">
-    <?php    echo("<form action='scegliAuto.php?mail=$mail' method='POST'>");?>
-            Npatente: 
-             <input type='text' name='Npatente'  required="required" minlength="10" maxlength="10">
+    <?php    echo("<form action='../interazioneDB/controlloAutista.php?mail=$mail' method='POST'>");?>
+
             <input value="Proponi Viaggio" type='submit'>
         </form>
         <p>oppure</p>
-        <?php    echo("<form action='../interazioneDB/aggPasseggiero.php?mail=$mail' method='POST'>");?>
+        <?php    echo("<form action='../interazioneDB/controlloPasseggiero.php?mail=$mail' method='POST'>");?>
 
             <input value="Cerca Viaggio" type='submit'>
         </form>
     
-        <?php    echo("<form action='recensioni.php?mail=$mail'>");?>
+        <?php    echo("<form action='recensioni.php?mail=$mail'  method='POST'>");?>
             <input value="scrivi una recensione" type='submit'>
         </form>
         </div>

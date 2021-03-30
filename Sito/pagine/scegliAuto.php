@@ -3,14 +3,13 @@
 <head>
     <?php
      $mail=$_GET['mail'];
+     $Npatente=$_GET['Npatente'];
     $mysqli = new mysqli('localhost', 'root', '', 'prova_esame_2017');
     if ($mysqli->connect_error) {
         die('Errore di connessione (' . $mysqli->connect_errno . ')' . $mysqli->connect_error);
         
     }
-    if(strlen($_POST['Npatente'])==10){
-        $Npatente=$_POST['Npatente'];
-    }else echo("Location: home.php");
+
         $sql = "SELECT * FROM auto WHERE Npatente='$Npatente'";
         $result = $mysqli->query($sql);
     ?>
@@ -34,7 +33,7 @@ if(is_bool($result)){
     );}
     
     echo("<div id='form'>
-        <form action='aggiungi.php?Npatente=$Npatente&mail=$mail' method='POST'>
+    <form action='aggiungi.php?mail=$mail&Npatente=$Npatente' method='POST'>
             Targa:
             <br> <input type='text' name='targa' required='required'>
             <br> Modello:
