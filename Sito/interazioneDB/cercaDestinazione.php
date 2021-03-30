@@ -3,6 +3,7 @@
 <head>
    <?php
       $mail=$_GET['mail'];
+      $codP=$_GET['CodP'];
     $mysqli = new mysqli('localhost', 'root', '', 'prova_esame_2017');
     if ($mysqli->connect_error) {
         die('Errore di connessione (' . $mysqli->connect_errno . ')' . $mysqli->connect_error);
@@ -26,7 +27,7 @@
         "Costo:".$row["Costo"]."<br>".
         "Note:".$row["note"]."<br></div>"
     );
-    echo("<form action='prenota.php?mail=$mail&Codv=$CodV'>
+    echo("<form action='../pagine/prenota.php?mail=$mail&Codv=$CodV&codP=$codP'>
     <input type='submit' value='Richiedi un posto'>
     </form>
     ");

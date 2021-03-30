@@ -25,7 +25,8 @@ if ($mysqli->connect_error) {
     while ($row = $result->fetch_assoc()) {
         $codV = $row["codV"] + 1;
     }
-    $result = $mysqli->query("SELECT CF FROM utente WHERE email=$mail");
+    $result = $mysqli->query("SELECT CF FROM utente WHERE email='$mail'");  
+   
     while ($row = $result->fetch_assoc()) {
         $CF = $row["CF"];
     }
@@ -38,12 +39,12 @@ if ($mysqli->connect_error) {
     echo ("<html>
     <div>
     VIAGGIO AGGIUNTO TORNA ALLA HOME
-    <form action='home.php?mail=$mail'>
+  <form action='../pagine/home.php?mail=$mail' method='POST'>
         <input type='submit' value='home'>
         </form><br></div>
         <div>
         O VISUALIZZA I TUOI VIAGGI
-    <form action='viaggi.php?mail=$mail'>
+    <form action='../pagine/home.php?mail=$mail' method='POST'>
         <input type='submit' value='I tuoi viaggi'>
         </form></div>
         </html>

@@ -21,7 +21,7 @@
             <input value="Proponi Viaggio" type='submit'>
         </form>
         <p>oppure</p>
-        <?php    echo("<form action='aggPasseggiero.php?mail=$mail' method='POST'>");?>
+        <?php    echo("<form action='../interazioneDB/aggPasseggiero.php?mail=$mail' method='POST'>");?>
 
             <input value="Cerca Viaggio" type='submit'>
         </form>

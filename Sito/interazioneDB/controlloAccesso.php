@@ -1,10 +1,10 @@
 <?php
 if (isset($_POST['email'])) {
     $email = $_POST['email'];
-} else header("Location: acesso.php?errore='email non valida'");
+} else header("Location: ../pagine/acesso.php?errore='email non valida'");
 if (isset($_POST['password'])) {
     $password = $_POST['password'];
-} else header("Location: accesso.php?errore='password non valida'");
+} else header("Location: ../pagine/accesso.php?errore='password non valida'");
 
 
 
@@ -22,7 +22,7 @@ if (isset($_POST['password'])) {
     if (mysqli_num_rows($ris)!=0) {
     while($riga = $ris ->fetch_array(MYSQLI_ASSOC)){
         echo "<br>";
-        if($riga['password'] == $password) header("Location: home.php?mail=$email");
-        else  header("Location: accesso.php?errore='password errata'");
+        if($riga['password'] == $password) header("Location: ../pagine/home.php?mail=$email");
+        else  header("Location: ../pagine/accesso.php?errore='password errata'");
     }
-    } else header("Location: registra.php?errore='Mail sbagliata'");}
+    } else header("Location: ../pagine/registra.php?errore='Mail sbagliata'");}

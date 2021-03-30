@@ -11,7 +11,7 @@
 
 <body>
     <div id="form">
-        <form action='controlloAccesso.php' method='POST'>
+        <form action='../interazioneDB/controlloAccesso.php' method='POST'>
             email: <br>
             <input type='email' name='email'><br> Password: <br>
             <input type='password' name='password'><br>

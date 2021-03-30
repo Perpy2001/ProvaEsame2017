@@ -21,7 +21,7 @@ if(is_bool($result)){
     $inserimento = "  INSERT INTO `passegieri`(`CodP`, `CF`) VALUES ('$codP','$CF')";
     $mysqli->query($inserimento);
 
-    header("Location: cerca.php?mail=$mail");
+    header("Location: ../pagine/cerca.php?mail=$mail");
 }
-header("Location: cerca.php?mail=$mail");
+header("Location: ../pagine/cerca.php?mail=$mail");
     ?>

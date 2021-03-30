@@ -25,7 +25,7 @@
 
 <body>
     <div id="form">
-      <?php  echo("<form action='aggiuntaViaggio.php?Npatente=$Npatente&mail=$mail' method='POST'>") ?>
+      <?php  echo("<form action='../interazioneDB/aggiuntaViaggio.php?Npatente=$Npatente&mail=$mail' method='POST'>") ?>
             Partenza:
             <br> <input type='text' name='partenza' required='required'>
             <br> Destinazione:

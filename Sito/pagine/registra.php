@@ -11,7 +11,7 @@
 
 <body>
     <div id="form">
-        <form action='controlloReg.php' method='POST'>
+        <form action='../interazioneDB/controlloReg.php' method='POST'>
             <p>!NON E' STATA IMPLEMENTATA SICULREZZA SULLE PASSWORD!</p>
             nome:
             <br> <input type='text' name='nome'>
