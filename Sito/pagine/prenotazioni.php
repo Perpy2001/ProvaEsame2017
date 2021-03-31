@@ -8,6 +8,9 @@
     die('Errore di connessione (' . $mysqli->connect_errno . ')' . $mysqli->connect_error);
   }
 
+  if (isset($_POST['Rimuovi'])) {
+    rimuovi($_POST['codR']);
+  }
   $sql =    "SELECT * FROM utente
 INNER JOIN passegieri
 ON  utente.CF = passegieri.CF
@@ -23,9 +26,6 @@ WHERE utente.email='$mail'";
         ";
   $result = $mysqli->query($sql);
 
-  if (isset($_POST['Rimuovi'])) {
-    rimuovi($_POST['codR']);
-  }
 
   ?>
 </head>
