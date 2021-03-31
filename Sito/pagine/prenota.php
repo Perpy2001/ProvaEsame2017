@@ -11,6 +11,15 @@
     while ($row = $result->fetch_assoc()) {
         $codR = $row["CodR"] + 1;
     }
-        $sql = "INSERT INTO `richiesta`(`CodR`, `CodV`,CodP) VALUES ($codR,$codV,'$codP')";
-        $result = $mysqli->query($sql);
+  
+
+        $sql = "INSERT INTO `richiesta`(`CodR`, `CodV`,CodP,stato) VALUES ($codR,$codV,'$codP','0')";
+        $mysqli->query($sql);
+        
+        echo(" 
+        PRENOTAZIONE EFFETTUATA NON RICEVERARI UNA NOTIFICA SE SARA' ACCETTATA
+        <form action='../pagine/home.php?mail=$mail' method='POST'>
+        <input type='submit' value='home'>
+        </form><br></div>
+        <div>");
         }?>

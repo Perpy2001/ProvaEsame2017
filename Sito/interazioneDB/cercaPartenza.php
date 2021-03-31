@@ -27,10 +27,11 @@
         "Costo:".$row["Costo"]."<br>".
         "Note:".$row["note"]."<br><br>"
     );
+    if($row["disponibilita"]>0){
     echo("<form action='../pagine/prenota.php?mail=$mail&Codv=$CodV&CodP=$codP' method='POST'>
     <input type='submit' value='Richiedi un posto'>
     </form></div>
-    ");
+    ");}
       }
     ?>
 </body>
